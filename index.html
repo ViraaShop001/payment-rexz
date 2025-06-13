@@ -1,0 +1,834 @@
+</style>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - Rexz Hosting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #3498db;
+            --primary-light: #5dade2;
+            --primary-dark: #2980b9;
+            --accent: #2ecc71;
+            --light: #ffffff;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --light-gray: #ecf0f1;
+            --light-blue: #e1f0fa;
+            --border: #bdc3c7;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--light-gray), #e0e8f0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: var(--light);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header Global */
+        .global-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            background: var(--light);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary-dark);
+        }
+
+        /* Menu 1 - Halaman Awal */
+        #menu1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        #menu2 {
+            display: none;
+        }
+
+        .welcome-title {
+            font-size: 2.6rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 800;
+            max-width: 800px;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-weight: 500;
+            max-width: 700px;
+        }
+
+        .welcome-desc {
+            font-size: 1.15rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 750px;
+            padding: 0 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            width: 170px;
+            padding: 25px 15px;
+            border-radius: 16px;
+            background: var(--light);
+            box-shadow: var(--shadow);
+            border: 2px solid var(--border);
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .social-link:hover .social-icon {
+            background: white;
+            color: var(--primary);
+        }
+
+        .social-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Menu 2 - Halaman Pembayaran */
+        .payment-content {
+            padding: 30px;
+        }
+
+        .payment-title {
+            text-align: center;
+            font-size: 2.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .qris-container {
+            text-align: center;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+
+        .qris-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            aspect-ratio: 1/1;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .qris-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .zoom-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .zoom-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .payment-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 30px 25px;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+        }
+
+        .payment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .payment-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .payment-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .payment-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .payment-detail {
+            margin: 20px 0;
+        }
+
+        .detail-label {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+            word-break: break-all;
+        }
+
+        .copy-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .copy-input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--light-gray);
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            min-width: 100px;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Note Section */
+        .note-payment {
+            background: var(--light-blue);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 50px 0 30px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .note-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .note-content {
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .note-content ul {
+            padding-left: 25px;
+            margin-top: 10px;
+        }
+
+        .note-content li {
+            margin-bottom: 8px;
+        }
+
+        .contact-admin {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .contact-admin:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Navigation Buttons */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            margin: 20px auto 40px;
+            border: none;
+            cursor: pointer;
+            display: block;
+            width: max-content;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            font-weight: 500;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--gray);
+            font-size: 0.95rem;
+            border-top: 1px solid var(--border);
+            background: var(--light);
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .payment-title {
+                font-size: 2rem;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 140px;
+                padding: 20px 10px;
+            }
+            
+            .btn-primary {
+                padding: 16px 35px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .global-header {
+                padding: 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .payment-content {
+                padding: 20px 15px;
+            }
+            
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .welcome-desc {
+                font-size: 1rem;
+            }
+            
+            .payment-title {
+                font-size: 1.7rem;
+            }
+            
+            .social-links {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .social-link {
+                width: 100%;
+                max-width: 160px;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-primary {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .copy-container {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Global -->
+        <div class="global-header">
+            <div class="logo">
+                <i class="fas fa-server"></i>
+                <span>Rexz Hosting</span>
+            </div>
+        </div>
+        
+        <!-- Menu 1: Halaman Awal -->
+        <div id="menu1">
+            <h1 class="welcome-title">Selamat Datang di Layanan Payment Rexz Hosting</h1>
+            <h2 class="subtitle">Kami menyediakan berbagai metode pembayaran digital terpercaya</h2>
+            <p class="welcome-desc">
+                Lakukan pembayaran dengan aman dan cepat menggunakan berbagai metode pembayaran digital. 
+                Setelah pembayaran berhasil, layanan hosting Anda akan langsung aktif dalam waktu maksimal 10 menit.
+            </p>
+            
+            <div class="social-links">
+                <a href="https://youtube.com/@rexz.official" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <span class="social-name">YouTube</span>
+                </a>
+                
+                <a href="https://wa.me/6285194293586" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <span class="social-name">WhatsApp</span>
+                </a>
+                
+                <a href="https://t.me/rexzofficial" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <span class="social-name">Telegram</span>
+                </a>
+                
+                <a href="https://whatsapp.com/channel/0029Vay2s9iEFeXfKW5LrE1S" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <span class="social-name">Saluran WA</span>
+                </a>
+                
+                <a href="https://chat.whatsapp.com/Kh9BFwPnLjLCVHnqMaa5FV" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="social-name">Grup WA</span>
+                </a>
+            </div>
+            
+            <button class="btn-primary" onclick="showPaymentMenu()">
+                <i class="fas fa-arrow-right"></i> Lanjut ke Metode Pembayaran
+            </button>
+        </div>
+        
+        <!-- Menu 2: Halaman Pembayaran -->
+        <div id="menu2">
+            <div class="payment-content">
+                <h2 class="payment-title">Metode Pembayaran Rexz Hosting</h2>
+                
+                <div class="qris-container">
+                    <img src="https://i.supa.codes/Ucs-8I" alt="QRIS Rexz Hosting" class="qris-image" onclick="openQris()">
+                    <a href="https://i.supa.codes/Ucs-8I" target="_blank" class="zoom-btn">
+                        <i class="fas fa-search"></i> Zoom QRIS
+                    </a>
+                </div>
+                
+                <div class="payment-methods">
+                    <!-- Dana -->
+                    <div class="payment-card">
+                        <div class="payment-header">
+                            <div class="payment-logo">
+                                <img src="https://i.supa.codes/jr08JD" alt="Logo DANA">
+                            </div>
+                            <h3 class="payment-name">DANA</h3>
+                        </div>
+                        
+                        <div class="payment-detail">
+                            <div class="detail-label">Nama Akun</div>
+                            <div class="detail-value">Rexz Store</div>
+                        </div>
+                        
+                        <div class="payment-detail">
+                            <div class="detail-label">Nomor</div>
+                            <div class="detail-value">6285194293586</div>
+                        </div>
+                        
+                        <div class="copy-container">
+                            <input type="text" class="copy-input" value="6285194293586" readonly>
+                            <button class="copy-btn" onclick="copyNumber('6285194293586', 'DANA')">Salin</button>
+                        </div>
+                    </div>
+                    
+                    <!-- OVO -->
+                    <div class="payment-card">
+                        <div class="payment-header">
+                            <div class="payment-logo">
+                                <img src="https://i.supa.codes/pfomGo" alt="Logo OVO">
+                            </div>
+                            <h3 class="payment-name">OVO</h3>
+                        </div>
+                        
+                        <div class="payment-detail">
+                            <div class="detail-label">Nama Akun</div>
+                            <div class="detail-value">Rexz Store</div>
+                        </div>
+                        
+                        <div class="payment-detail">
+                            <div class="detail-label">Nomor</div>
+                            <div class="detail-value">6285194293586</div>
+                        </div>
+                        
+                        <div class="copy-container">
+                            <input type="text" class="copy-input" value="6285194293586" readonly>
+                            <button class="copy-btn" onclick="copyNumber('6285194293586', 'OVO')">Salin</button>
+                        </div>
+                    </div>
+                    
+                    <!-- GoPay -->
+                    <div class="payment-card">
+                        <div class="payment-header">
+                            <div class="payment-logo">
+                                <img src="https://i.supa.codes/hKhHU0" alt="Logo GoPay">
+                            </div>
+                            <h3 class="payment-name">GOPAY</h3>
+                        </div>
+                        
+                        <div class="payment-detail">
+                            <div class="detail-label">Nama Akun</div>
+                            <div class="detail-value">Rexz Store</div>
+                        </div>
+                        
+                        <div class="payment-detail">
+                            <div class="detail-label">Nomor</div>
+                            <div class="detail-value">6285194293586</div>
+                        </div>
+                        
+                        <div class="copy-container">
+                            <input type="text" class="copy-input" value="6285194293586" readonly>
+                            <button class="copy-btn" onclick="copyNumber('6285194293586', 'GoPay')">Salin</button>
+                        </div>
+                    </div>
+                    
+                    <!-- ShopeePay -->
+                    <div class="payment-card">
+                        <div class="payment-header">
+                            <div class="payment-logo">
+                                <img src="https://i.supa.codes/hahtI0" alt="Logo ShopeePay">
+                            </div>
+                            <h3 class="payment-name">ShopeePay</h3>
+                        </div>
+                        
+                        <div class="payment-detail">
+                            <div class="detail-label">Nama Akun</div>
+                            <div class="detail-value">Rexz Store</div>
+                        </div>
+                        
+                        <div class="payment-detail">
+                            <div class="detail-label">Nomor</div>
+                            <div class="detail-value">6285194293586</div>
+                        </div>
+                        
+                        <div class="copy-container">
+                            <input type="text" class="copy-input" value="6285194293586" readonly>
+                            <button class="copy-btn" onclick="copyNumber('6285194293586', 'ShopeePay')">Salin</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Catatan Pembayaran -->
+                <div class="note-payment">
+                    <div class="note-title">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>Setelah melakukan transfer:</h3>
+                    </div>
+                    <div class="note-content">
+                        <ul>
+                            <li>Kirim bukti transfer (screenshot) ke WhatsApp Admin</li>
+                            <li>Tunggu maksimal 5-10 menit untuk proses verifikasi</li>
+                            <li>Untuk bantuan, silakan hubungi Owner</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/6285194293586" class="contact-admin" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Hubungi Admin
+                    </a>
+                </div>
+                
+                <!-- Tombol Kembali -->
+                <button class="back-btn" onclick="showWelcomeMenu()">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Menu Awal
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            &copy; 2023 Rexz Hosting. Layanan hosting terbaik untuk kebutuhan online Anda.
+        </div>
+    </div>
+    
+    <!-- Notification Element -->
+    <div class="notification" id="notification">
+        Nomor berhasil disalin!
+    </div>
+    
+    <script>
+        // Fungsi untuk menampilkan menu pembayaran
+        function showPaymentMenu() {
+            document.getElementById('menu1').style.display = 'none';
+            document.getElementById('menu2').style.display = 'block';
+            
+            // Scroll ke atas halaman
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Fungsi untuk kembali ke menu awal
+        function showWelcomeMenu() {
+            document.getElementById('menu2').style.display = 'none';
+            document.getElementById('menu1').style.display = 'flex';
+            
+            // Scroll ke atas halaman
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Fungsi untuk membuka QRIS di tab baru
+        function openQris() {
+            window.open('https://i.supa.codes/Ucs-8I', '_blank');
+        }
+        
+        // Fungsi untuk menyalin nomor ke clipboard
+        async function copyNumber(number, provider) {
+            try {
+                // Salin teks ke clipboard menggunakan API modern
+                await navigator.clipboard.writeText(number);
+                
+                // Tampilkan notifikasi
+                showNotification(`Nomor ${provider} berhasil disalin!`);
+                
+                // Ubah teks tombol sementara
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Tersalin!';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            } catch (err) {
+                console.error('Gagal menyalin teks: ', err);
+                showNotification('Gagal menyalin nomor');
+            }
+        }
+        
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            // Sembunyikan notifikasi setelah 3 detik
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
